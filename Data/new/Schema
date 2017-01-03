@@ -1,3 +1,0 @@
-table ID:int fname:str lname:mix
-table1 name:str phone:int
-table2 name:str emai:str fax:int

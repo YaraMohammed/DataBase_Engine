@@ -4,7 +4,7 @@ typeset -i counter=1
 function main
 {
 #Display menu
-select x in "Create new DataBase" "Open DataBase" "Display Existing DataBase" "Delete DataBase" "Exit"
+select x in "Create new DataBase" "Open DataBase" "Delete DataBase" "Exit"
 do
 case $REPLY in
 1) echo Create new DataBase
@@ -18,11 +18,16 @@ read
 counter+=1
 main
 ;;
-3) echo Display DataBase
+3) echo WARNING: you are about to delete the entire DataBase ARE you sure [y/n]
+read
+if [[ $REPLY == "y" ]]
+then 
+echo Enter Database name to Delete
+read
+./Delete.sh "db" $REPLY
+fi
 ;;
-4) echo Delete Database
-;;
-5) echo Exit
+4) echo Exit
 break $counter
 ;;
 esac
