@@ -20,7 +20,18 @@ fi
 done
 done
 mkdir ../Data/$REPLY
-touch ../Data/$REPLY/Scehma
+touch ../Data/$REPLY/Schema
+while test $exist_flag == "false"
+do
+for element in `ls ../Data`
+do
+if test $REPLY == $element
+then
+echo "DataBase Successfully Created ^_^"
+exist_flag="true"
+fi
+done
+done
 } 
 
 Create_DB
