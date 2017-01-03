@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 typeset -i counter=1
 function main
@@ -13,7 +13,19 @@ case $REPLY in
 2) echo Open DataBase
 echo Enter DataBase name
 read
-./OpenDB.sh $REPLY
+exist_flag="false"
+		for element in `ls ../Data`
+			do
+			if test $REPLY == $element
+				then
+				./OpenDB.sh $REPLY
+				exist_flag="true"
+			fi
+			done
+if test $exist_flag == "false"
+then
+echo "DataBase doesn't exist"
+fi
 #count number of time main function is called to pass to break at exit
 counter+=1
 main
