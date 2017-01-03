@@ -7,4 +7,4 @@ Data Directory contains all created DataBases
 to RUN
 ./DataBase_Engine/main.sh
 
-Data Types are c for char / i for  integer / f for float
+Data Types are int | str | mix
