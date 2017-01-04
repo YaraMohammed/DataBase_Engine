@@ -23,7 +23,6 @@ do
 	do
   	if [ $name == $Tname ]
   	then	
-		echo "Error: $Tname table name exist"
 		flag=true
 		echo "Error: $Tname table name exist Plese Re-enter table name and colomn number: " 
                 read Tname Colnum
@@ -39,19 +38,46 @@ Tschema=$Tname
 while [ $colnum -le $Colnum ]
 do
 	#ask user for colomn name
-	echo Enter colomn $colnum Name and type seperated by space: 
+	if [ $colnum -eq 1 ]
+	then
+		echo Enter Primarykey colomn Name and type seperated by space:
+	else
+		echo Enter colomn $colnum Name and type seperated by space: 
+	fi
 	read ColName ColType
-	while [ -z $ColType ]
+	typer=true
+	while [ $typer == true ]
 	do
-	  echo "Error: There is no colomn type please Re-enter"
-	  read ColName ColType
+	case $ColType in 
+	"int")
+		typer=false
+	;;
+	"str")
+		typer=false
+	;;
+	"mix")
+	   typer=false
+	;;
+	*)
+        if [ $colnum -eq 1 ]
+        then
+	          echo "Error: Invalid colomn type please Re-enter colomn PrimaryKey Name and type seperated by space (type should be str or int or mix)"
+        else
+	          echo "Error: Invalid colomn type please Re-enter colomn $colnum Name and type seperated by space (type should be str or int or mix)"
+
+        fi
+
+          read ColName ColType
+	;;
+	esac
 	done
 	Tschema="$Tschema $ColName:$ColType"
 	((colnum=colnum + 1))
+	
 done
-
 echo $Tschema>> $db_path/Schema
 touch $db_path/$Tname
-fi
 
+echo "Table created ^_^"
+fi
 
