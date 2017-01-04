@@ -26,6 +26,22 @@ fi
 #./Insert.sh $1 $REPLY
 ;;
 3) echo Display Table
+echo Enter Table name
+read
+exist_flag="false"
+                for element in `ls ../Data/$1`
+                        do
+                        if test $REPLY == $element
+                                then
+                             	awk -F"|" '{print $0}' ../Data/$1/$REPLY
+                                exist_flag="true"
+                                break
+                        fi
+                        done
+if test $exist_flag == "false"
+then
+echo "Table Doesn't Exist"
+fi
 ;;
 4) echo Update Table
 ;;

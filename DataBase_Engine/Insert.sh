@@ -62,18 +62,25 @@ while test $counter -gt 0
         echo Primary Key Exist Enter Valid Primary Key
         read value
         check_pk
+	#./type_check.sh $type $value
         done
 	
 	 ./type_check.sh $type $value
         #check for script exit status to validate type
         if [ $? -eq 0 ]
         then
+	check_pk
+	if test $pkExist == "false"
+	then
         row+=$value
+	else
+	echo Invalid Primary Key Back to Open DB menu
+	fi
         else
         check $type
         fi
-	fi
 
+	else
 	 ./type_check.sh $type $value
 	#check for script exit status to validate type
 	if [ $? -eq 0 ]
@@ -81,6 +88,7 @@ while test $counter -gt 0
 	row+="|"$value 
 	else
 	check $type
+	fi
 	fi
 done
 
