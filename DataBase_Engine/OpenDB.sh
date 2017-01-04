@@ -9,7 +9,21 @@ case $REPLY in
 2) echo Insert In a Table
 echo Enter Table name
 read
-./Insert.sh $1 $REPLY
+exist_flag="false"
+                for element in `ls ../Data/$1`
+                        do
+                        if test $REPLY == $element
+                                then
+                             	./Insert.sh $1 $REPLY
+                                exist_flag="true"
+                                break
+                        fi
+                        done
+if test $exist_flag == "false"
+then
+echo "Table Doesn't Exist"
+fi
+#./Insert.sh $1 $REPLY
 ;;
 3) echo Display Table
 ;;
