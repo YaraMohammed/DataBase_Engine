@@ -18,16 +18,23 @@ function check
 #check primary key
 function check_pk
 {
+if [ -z "$value" ]; then
+null="true"
+echo "Primary Key Can't Be NULL"
+else
 for col in $arr
 do
 if test $value == $col
 then
+null="false"
 pkExist="true"
 break
 else
+null="false"
 pkExist="false"
 fi
 done
+fi
 }
 
 touch temp
@@ -56,8 +63,8 @@ while test $counter -gt 0
         if test $y -eq 3
         then
         check_pk
-
-        while test $pkExist == "true"
+null="true"
+        while [$pkExist == "true" ]
         do
         echo Primary Key Exist Enter Valid Primary Key
         read value
